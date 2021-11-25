@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  application:
+    container_name: user-crud
+    image: user-crud:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn start:prod
+    environment:
+      - PORT=7000
+      - HBS_ROOT_DIR=views
+      - HBS_LAYOUT_DIR=/layouts
+      - HBS_LAYOUT_PARTIALS=/partials
+      - MONGOOSE_CONNECT=mongodb://mongodb:27017/user-crud
+    ports:
+      - 7000:7000
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+volumes:
+  mongodb:

@@ -1,0 +1,7 @@
+.dropdown-toggle.not-arrow::after, .dropdown-toggle.not-arrow::before {
+    content: none;
+}
+
+.table-responsive{
+    overflow-x: visible;
+}
